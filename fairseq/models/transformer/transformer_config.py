@@ -228,6 +228,44 @@ class TransformerConfig(FairseqDataclass):
         default=False,
         metadata={"help": "don't add an extra layernorm after the last decoder block"},
     )
+    
+    baseline_path: str = field(
+        default="",
+        metadata={"help": "Path to the baseline model checkpoint."},
+    )
+
+    output_projection: str = field(
+        default="linear",
+        metadata={"help": "output projection type: 'linear' or 'input_word_embedding'"},
+    )
+
+    top_k: int = field(
+        default=2,
+        metadata={
+            "help": "the number of top-k in the training stage of reranking"
+        }
+    )
+
+    contrastive_learning: bool = field(
+        default=False,
+        metadata={
+            "help": "whether to use contrastive learning"
+        }
+    )
+    
+    need_mask: bool = field(
+        default=False,
+        metadata={
+            "help": "whether to retain mask token's representation."
+        }
+    )
+
+    dynamic_negative_sampling: bool = field(
+        default=False,
+        metadata={
+            "help": "whether to use dynamic negative sampling when training."
+        }
+    )
 
     # We need to make this hierarchical dataclass like the flat namespace
     # __getattr__ and __setattr__ here allow backward compatibility
